@@ -112,7 +112,8 @@
 	if (navigator.geolocation) {
 		
         navigator.geolocation.getCurrentPosition(function (position) {
-			x.innerHTML =  "hgfh"; 
+			x.innerHTML =  "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude; 
 		});
 		 
     } else { 
