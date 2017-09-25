@@ -108,14 +108,11 @@
 		var Namelb = document.getElementById("Name");
 			
 		Namelb.innerHTML = snapshot.val().Name;
-		
-		
-			
-			
+				
 	});
 	var Monthlb = document.getElementById("Month");
 	var d= new Date();
-		Monthlb.innerHTML= d.getMonth()+1;
+	Monthlb.innerHTML= (d.getMonth())+1;
 	var updateMonthly = firebase.database().ref('customer/cust01');
 	updateMonthly.on('value', function(snapshot) {
 		
@@ -145,7 +142,7 @@
 		var update = firebase.database().ref('Dustbin');
 	
 	update.on('value', function(snapshot) {
-	var minDist= 100000000000000;
+	var minDist= 300;
 	snapshot.forEach(function(child){
 		var p1 = new google.maps.LatLng(latitude,longitude);
 		
