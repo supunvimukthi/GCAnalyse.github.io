@@ -89,28 +89,44 @@
 			NIC.innerHTML = username;
 				
 			  // Initialize Firebase
-			  var config = {
-				apiKey: "AIzaSyCy_Ay7VF2RKA63_2ztPTv1xMWEMDeyK74",
-				authDomain: "gcwa-cf247.firebaseapp.com",
-				databaseURL: "https://gcwa-cf247.firebaseio.com",
-				projectId: "gcwa-cf247",
-				storageBucket: "gcwa-cf247.appspot.com",
-				messagingSenderId: "944297710809"
-			  };
-			  firebase.initializeApp(config);
+			   var config = {
+			apiKey: "AIzaSyCIkj4oK1ZYCgMx0XSHRphM_gZCcmzFph0",
+			authDomain: "smart-garbage-scorpion.firebaseapp.com",
+			databaseURL: "https://smart-garbage-scorpion.firebaseio.com",
+			projectId: "smart-garbage-scorpion",
+			storageBucket: "smart-garbage-scorpion.appspot.com",
+			messagingSenderId: "725606842633"
+		  };
+		  firebase.initializeApp(config);
 			
 			  
 	var updateMonthlyDisposal = firebase.database().ref('User/'+username);
+	
 	
 	updateMonthlyDisposal.on('value', function(snapshot) {
 		
 		var Namelb = document.getElementById("Name");
 		var Monthlb = document.getElementById("Month");
-		var Disposalb = document.getElementById("Amount");
+		
 		
 		Disposalb.innerHTML= snapshot.val().Disposal;
-		Monthlb.innerHTML= snapshot.val().Month;
+		var d= new Date();
+		Monthlb.innerHTML= d.getMonth()+1;
 		Namelb.innerHTML = snapshot.val().Name;
+		
+		
+			
+			
+	});
+	var updateMonthlyDisposal = firebase.database().ref('customer/cust01');
+	updateMonthlyDisposal.on('value', function(snapshot) {
+		
+		
+		var Disposalb = document.getElementById("Amount");
+		
+		Disposalb.innerHTML= snapshot.val().garbage;
+		
+		cust = snapshot.val().cust;
 		
 			
 			
