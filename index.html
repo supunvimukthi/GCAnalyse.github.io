@@ -82,6 +82,11 @@
 	
 <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
 <script>
+			var data = location.search.substring(1).split("=");
+			var username= unescape(data[1]);
+			var NIClb = document.getElementById("NIC");
+			NIC.innerHTML = username;
+				
 			  // Initialize Firebase
 			  var config = {
 				apiKey: "AIzaSyCy_Ay7VF2RKA63_2ztPTv1xMWEMDeyK74",
@@ -94,12 +99,14 @@
 			  firebase.initializeApp(config);
 			
 			  
-	var updateMonthlyDisposal = firebase.database().ref('User/95');
+	var updateMonthlyDisposal = firebase.database().ref('User/'+username);
 	
 	updateMonthlyDisposal.on('value', function(snapshot) {
+		
 		var Namelb = document.getElementById("Name");
 		var Monthlb = document.getElementById("Month");
 		var Disposalb = document.getElementById("Amount");
+		
 		Disposalb.innerHTML= snapshot.val().Disposal;
 		Monthlb.innerHTML= snapshot.val().Month;
 		Namelb.innerHTML = snapshot.val().Name;
