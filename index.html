@@ -116,8 +116,8 @@
 	var Monthlb = document.getElementById("Month");
 	var d= new Date();
 		Monthlb.innerHTML= d.getMonth()+1;
-	var updateMonthlyDisposal = firebase.database().ref('customer/cust01');
-	updateMonthlyDisposal.on('value', function(snapshot) {
+	var updateMonthly = firebase.database().ref('customer/cust01');
+	updateMonthly.on('value', function(snapshot) {
 		
 		
 		var Disposalb = document.getElementById("Amount");
