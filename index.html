@@ -83,10 +83,10 @@
 <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
 <script>
-			var data = location.search.substring(1).split("=");
-			var username= unescape(data[1]);
-			var NIClb = document.getElementById("NIC");
-			NIC.innerHTML = username;
+			//var data = location.search.substring(1).split("=");
+			//var username= unescape(data[1]);
+			//var NIClb = document.getElementById("NIC");
+			//NIC.innerHTML = username;
 				
 			  // Initialize Firebase
 			  var config = {
@@ -100,7 +100,7 @@
 			  firebase.initializeApp(config);
 			
 			  
-	var updateMonthlyDisposal = firebase.database().ref('User/'+username);
+	var updateMonthlyDisposal = firebase.database().ref('User/95');
 	
 	updateMonthlyDisposal.on('value', function(snapshot) {
 		
