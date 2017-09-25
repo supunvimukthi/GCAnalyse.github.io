@@ -119,14 +119,22 @@
 	
 	
 	var x = document.getElementById("Location");
+	var latitude;
+	var longitude;
+	
 	if (navigator.geolocation) {
-		var latitude;
-		var longitude;
+		
         navigator.geolocation.getCurrentPosition(function (position) {
 			latitude= position.coords.latitude ;
 			longitude= position.coords.longitude; 
-		});
-		var update = firebase.database().ref('Dustbin');
+		});	
+	
+		 
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+	
+	var update = firebase.database().ref('Dustbin');
 	
 	update.on('value', function(snapshot) {
 	var minDist= 100000000000000;
@@ -143,14 +151,6 @@
 	
 		
 	});
-		
-		
-	
-		 
-    } else { 
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-	
 	
 	function calcDistance(p1, p2) {
   return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
