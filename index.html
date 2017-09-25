@@ -106,18 +106,16 @@
 	updateMonthlyDisposal.on('value', function(snapshot) {
 		
 		var Namelb = document.getElementById("Name");
-		var Monthlb = document.getElementById("Month");
-		
-		
-		Disposalb.innerHTML= snapshot.val().Disposal;
-		var d= new Date();
-		Monthlb.innerHTML= d.getMonth()+1;
+			
 		Namelb.innerHTML = snapshot.val().Name;
 		
 		
 			
 			
 	});
+	var Monthlb = document.getElementById("Month");
+	var d= new Date();
+		Monthlb.innerHTML= d.getMonth()+1;
 	var updateMonthlyDisposal = firebase.database().ref('customer/cust01');
 	updateMonthlyDisposal.on('value', function(snapshot) {
 		
