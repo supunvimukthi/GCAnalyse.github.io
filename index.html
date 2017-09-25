@@ -81,6 +81,7 @@
 	</div>
 	
 <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
 <script>
 			var data = location.search.substring(1).split("=");
 			var username= unescape(data[1]);
@@ -114,30 +115,46 @@
 			
 			
 	});
+		
+	
 	
 	var x = document.getElementById("Location");
 	if (navigator.geolocation) {
-		
+		var latitude;
+		var longitude;
         navigator.geolocation.getCurrentPosition(function (position) {
-			x.innerHTML =  "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude; 
+			latitude= position.coords.latitude ;
+			longitude= position.coords.longitude; 
 		});
+		var update = firebase.database().ref('Dustbin');
+	
+	update.on('value', function(snapshot) {
+	var minDist= 100000000000000;
+	snapshot.forEach(function(child){
+		var p1 = new google.maps.LatLng(latitude,longitude);
+		
+		var p2 = new google.maps.LatLng(child.val().latitude,child.val().longitude);
+		var dist=(calcDistance(p1, p2));
+		if(dist<minDist){	
+			minDist= dist;
+		}	
+    });
+	document.getElementById("Location").innerHTML = minDist;
+	
+		
+	});
+		
+		
+	
 		 
     } else { 
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 	
 	
-	function Snapshot() {
-			 firebase.database().ref('BabyCare/video/snap').set("Yes");
-			 var img = document.getElementById("img");
-			 img.style.display = "block";			 
-			 img.src = "https://firebasestorage.googleapis.com/v0/b/babycare-3b246.appspot.com/o/gr-1-eng-les-2-0.png?alt=media&token=417b1e22-9ca9-4966-983d-92481d22fd1f";
-			 
-	}
-	function CareTakerStat() {
-		
-	}	
+	function calcDistance(p1, p2) {
+  return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
+}	
 	</script>	
 	</body>
 </html>
